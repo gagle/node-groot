@@ -21,41 +21,8 @@ describe('groot', function () {
   it('sets global vars', function (done) {
     groot({ requireVar: '__require', rootVar: '__root', rootDir: __dirname });
 
-    expect(global.__require).to.be.a.function();
-    expect(global.__root).to.be.equal(__dirname);
-
-    done();
-  });
-});
-
-describe('groot', function () {
-  after(function (done) {
-    delete global.__base;
-    done();
-  });
-
-  it('does not do anything if no options are passed', function (done) {
-    groot();
-
-    expect(global.__require).to.not.exist();
-    expect(global.__root).to.not.exist();
-
-    done();
-  });
-
-  it('takes the __dirname of the caller function if rootDir is not passed',
-      function (done) {
-    groot({ rootVar: '__base' });
-
-    expect(global.__base).to.be.equal(__dirname);
-
-    done();
-  });
-
-  it('requires absolute root paths', function (done) {
-    expect(function () {
-      groot({ rootDir: 'foo' });
-    }).to.throw();
+    expect(__require).to.be.a.function();
+    expect(__root).to.be.equal(__dirname);
 
     done();
   });
@@ -70,16 +37,58 @@ describe('groot', function () {
   it('calls the original require function', function (done) {
     groot({ requireVar: '__require' });
 
-    expect(global.__require('./foo')).to.be.equal('bar');
+    expect(__require('./quux')).to.be.equal('quux');
 
     done();
   });
 
-  it('does not allow paths not starting with a dot', function (done) {
+  it('takes paths relative from the root', function (done) {
+    groot({ requireVar: '__require' });
+
+    expect(__require('./foo/bar')).to.be.equal('qux');
+
+    done();
+  });
+
+  it('requires paths starting with a dot', function (done) {
     groot({ requireVar: '__require' });
 
     expect(function () {
-      global.__require('foo');
+      __require('foo');
+    }).to.throw();
+
+    done();
+  });
+});
+
+describe('groot', function () {
+  after(function (done) {
+    delete global.__base;
+    done();
+  });
+
+  it('does not do anything if no options are passed', function (done) {
+    var globalKeys = Object.keys(global).length;
+
+    groot();
+
+    expect(Object.keys(global).length).to.equal(globalKeys);
+
+    done();
+  });
+
+  it('takes the __dirname of the caller function if rootDir is not passed',
+      function (done) {
+    groot({ rootVar: '__base' });
+
+    expect(__base).to.be.equal(__dirname);
+
+    done();
+  });
+
+  it('requires absolute root paths', function (done) {
+    expect(function () {
+      groot({ rootDir: 'foo' });
     }).to.throw();
 
     done();
