@@ -17,7 +17,7 @@ The way this module avoids the relative paths is by using global variables. This
 require('groot')({ requireVar: '__require', rootVar: '__root' });
 ```
 
-If you execute the above piece of code in the main file, which is typically stored in the root directory, `__root` and `__require` will be global variables. `__root` will contain the absolute path of the root directory, and `__require` will be a function similar to `require()` but for loading the modules relative to root directory.
+If you execute the above piece of code in the main file, which is typically stored in the root directory, `__root` and `__require` will be set as global variables. `__root` will contain the absolute path of the root directory, and `__require` will be a function similar to `require()` but for loading the modules relative to root directory.
 
 The root directory is the `__dirname` of the caller function.
 
