@@ -64,7 +64,7 @@ Options:
 - __rootVar__ - _String_  
   Name of the global variable of the root directory.
 - __rootDir__ - _String_  
-  Absolute path that will be used as a root directory.
+  Absolute path that will be used as the root directory.
 
 [npm-image]: https://img.shields.io/npm/v/groot.svg?style=flat
 [npm-url]: https://npmjs.org/package/groot
