@@ -1,6 +1,6 @@
 {
   "name": "groot",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Module loader with global variables",
   "keywords": [
     "require",
@@ -20,8 +20,8 @@
     "lab": "^5.2.1"
   },
   "scripts": {
-    "test": "node node_modules/lab/bin/lab test/index.js -t 100",
-    "test-lcov": "node node_modules/lab/bin/lab test/index.js -t 100 -r lcov"
+    "test": "lab test/index.js -t 100",
+    "test-lcov": "lab test/index.js -t 100 -r lcov"
   },
   "license": "MIT",
   "main": "lib"
