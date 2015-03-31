@@ -17,11 +17,11 @@ The way this module avoids the relative paths is by using global variables. This
 require('groot')({ requireVar: '__require', rootVar: '__root' });
 ```
 
-If you execute the above piece of code in the main file, which is typically stored in the root directory, `__root` and `__require` will be set as global variables. `__root` will contain the absolute path of the root directory, and `__require` will be a function similar to `require()` but for loading the modules relative to root directory.
+If you execute the above piece of code in the main file, which is typically stored in the root directory, `__root` and `__require` will be set as global variables. `__root` will contain the absolute path of the root directory, and `__require` will be a function similar to `require()` but for loading the modules relative to the root directory.
 
-The root directory is the `__dirname` of the caller function.
+By default, the root directory is the fiel's `__dirname` of the caller.
 
-For example, given the project's directory tree:
+For example, given the project directory tree:
 
 ```
 .
@@ -41,9 +41,9 @@ var qux = __require('./baz/qux');
 // "." points to the __dirname of app.js, that is, the project's root directory
 ```
 
-Note that `__require('baz/qux')` (without a dot `.`) is intentionally invalid to avoid confusion with modules stored inside `node_modules`. The path must begin with a dot `.`.
+Note that `__require('baz/qux')` (without a dot `.`) is intentionally invalid and will throw an error for avoiding confusion with modules stored inside `node_modules`. The path must begin with a dot, `.`.
 
-An extra option can be passed to set the root directory instead of the directory of the caller:
+An extra option can be specified to manually set the root directory:
 
 ```javascript
 require('groot')({
@@ -53,7 +53,7 @@ require('groot')({
 });
 ```
 
-By setting `rootDir` to `__dirname` this is, in fact, the same as not setting the `rootDir` option.
+By setting `rootDir` to `__dirname`, this is, in fact, the same as not setting the `rootDir` option.
 
 ___module_([options]) : undefined__
 
