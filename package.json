@@ -20,8 +20,8 @@
     "lab": "^5.2.1"
   },
   "scripts": {
-    "test": "lab test/index.js -t 100",
-    "test-lcov": "lab test/index.js -t 100 -r lcov"
+    "test": "lab test/index.js -t 100 -I __require,__root,__base",
+    "test-lcov": "lab test/index.js -t 100 -I __require,__root,__base -r lcov"
   },
   "license": "MIT",
   "main": "lib"
