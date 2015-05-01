@@ -1,6 +1,6 @@
 {
   "name": "groot",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "description": "Module loader with global variables",
   "keywords": [
     "require",
@@ -13,7 +13,7 @@
   "author": "Gabriel Llamas <gagle@outlook.com>",
   "repository": "git://github.com/gagle/node-groot.git",
   "engines": {
-    "node": ">=0.10"
+    "node": ">=0.12"
   },
   "devDependencies": {
     "code": "^1.3.0",
